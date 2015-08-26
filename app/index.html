@@ -22,51 +22,44 @@
     <!-- endbuild -->
     
   </head>
-  <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-    
+ 
+  <body class="body">
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">weather app</h3>
-      </div>
-
+    <select id="cities">
+        <option>Dubai</option>
+        <option>London</option>
+        <option>Antarctica</option>
+        <option>New Mexico</option>
+        <option>Helsinki</option>
+        <option>Howey-in-the-Hills, FL</option>
+        <option>Akyab</option>
+        <option>Kolkata</option>
+        <option>Karachi</option>
+        <option>Melbourne</option>
+        <option>Alice Springs</option>
+        <option>New Jersey</option>
+        <option>Cape Town</option>
+        <option>Berlin</option>
+        <option>Vladivostock</option>
+        <option>Sofia</option>
+        <option>Llanfairpwllgwyngyll</option>
+        <option>Krung Thep Mahanakhon Amon Rattanakosin Mahinthara Yuthaya Mahadilok Phop Noppharat Ratchathani Burirom Udomratchaniwet Mahasathan Amon Piman Awatan Sathit Sakkathattiya Witsanukam Prasit</option>
+    </select>
       <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid! <span class="glyphicon glyphicon-ok"></span></a></p>
+        <span class="location"></span>
+        <span class="country"></span>
       </div>
-
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4><a href="https://html5boilerplate.com/">HTML5 Boilerplate</a></h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-
-          <h4><a href="http://libsass.org/">Sass</a></h4>
-          <p>Sass is a mature, stable, and powerful professional grade CSS extension language.</p>
-          
-
-          <h4><a href="http://getbootstrap.com/">Bootstrap</a></h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-
-          <h4><a href="http://modernizr.com/">Modernizr</a></h4>
-          <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-          
-        </div>
-      </div>
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
+      <span class="currently"></span>
+      <span class="temperature"></span>
+      <span class="climate_bg"></span>
+      <span class="info_bg"></span>
+      <span class="humidity"></span>
+      <span class="text"></span>
     </div>
-    
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -93,10 +86,13 @@
     
 
     <!-- build:js scripts/main.js -->
+    <script src="scripts/blur.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/weather.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;

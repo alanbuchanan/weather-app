@@ -390,7 +390,7 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
-    }
+    },
   buildcontrol: {
     options: {
       dir: 'dist',

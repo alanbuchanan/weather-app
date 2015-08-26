@@ -1,2 +1,8 @@
-// jshint devel:true
-console.log('\'Allo \'Allo!');
+"use strict";
+
+jQuery(document).ready(function($) {
+	$('body').fadeIn();
+	$('div').on('click', function(event) {
+		
+	});
+});
