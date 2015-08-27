@@ -8,14 +8,19 @@ if("geolocation" in navigator) {
 	loadWeather("London", "IN", "");
 }
 
-// Keep playing around with using 'f' or 'c' as unit
+$(window).on('load', function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");
+	});
 
 jQuery(document).ready(function($) {
 	// loadWeather();
+	// $(".se-pre-con").fadeOut("slow");
 	setInterval(loadWeather, 2000);
 });
 
 function loadWeather(location, woeid, unit){
+		// $(".se-pre-con").fadeOut("slow");
 	$.simpleWeather({
 		location: $('#cities').val(),
 		woeid: '',
@@ -26,14 +31,32 @@ function loadWeather(location, woeid, unit){
 			console.log(weather);
 			console.log(weather.code);
 
+			// Handle location font size
 			if( this.location.length > 11 ){
-				$('.location').css('font-size', '4.5em');
+				$('.location').css('font-size', '4.0em');
 			}
 
 			if( this.location.length > 19 ){
 				$('.location').css('font-size', '3.0em');
 			}
 
+			// Handle location font size on phone screens
+			if (Modernizr.mq('(max-width: 480px)')) {
+				if( this.location.length < 11){
+				    $('.location').css('font-size', '2em');
+				}
+				else if( this.location.length >= 11 && this.location.length < 18){
+				    $('.location').css('font-size', '2.0em');
+				}
+				else if( this.location.length >= 18 ){
+				    $('.location').css('font-size', '1.0em');
+				}
+			}
+			// } else {
+			//     $('.location').css('font-size', '100%');
+			// }
+
+			// Assign object vars to shortened names
 			var city = weather.city;
 			var temp = weather.temp;
 			var wcode = '<img class="weathericon" src="images/weathericons/' + weather.code + '.svg">';
@@ -41,11 +64,26 @@ function loadWeather(location, woeid, unit){
 			var humidity = weather.humidity + '%';
 			var currently = weather.currently;
 			var text = '';
+			var country = weather.country;
 			if(currently !== weather.text){
 				text = weather.text;
 			}
-			var country = weather.country;
 
+			// Handle current weather font size
+			if(currently.length >= 1 && currently.length <= 4){
+				$('.currently').css('font-size', '100%');
+			}
+			if(currently.length >= 5 && currently.length <= 9){
+				$('.currently').css('font-size', '90%');
+			}
+			if(currently.length >= 10 && currently.length <= 13){
+				$('.currently').css('font-size', '80%');
+			}
+			if(currently.length >= 13 && currently.length <= 22){
+				$('.currently').css('font-size', '70%');
+			}
+
+			// Assign shortened variables to DOM classes
 			$('.code').text('CODE: ' + weather.code);
 			$('.location').text(city);
 			$('.temperature').html(temp);
@@ -56,10 +94,8 @@ function loadWeather(location, woeid, unit){
 			$('.text').text(text);
 			$('.country').text(country)
 
-			function changeBgImg(linkToImg) {
-				return $('body').css('background-image', 'url(' + linkToImg + ')');
-			}
-
+			// Assign background image links to variables
+			var defaultImg 	= "https://upload.wikimedia.org/wikipedia/commons/8/80/Newbury_and_surroundings.jpg";
 			var sunnyImg 	= "http://u.kanobu.ru/comments/images/92025b04-c980-46da-8859-66f64c997468.jpg";
 			var rainyImg 	= "http://webneel.com/wallpaper/sites/default/files/images/04-2013/cute-rain-in-mirror.jpg";
 			var cloudyImg 	= "http://p1.pichost.me/i/31/1542826.jpg";
@@ -67,38 +103,37 @@ function loadWeather(location, woeid, unit){
 			var clearImg_n 	= "http://images.summitpost.org/original/472297.jpg";
 			var cloudyImg_n = "https://c1.staticflickr.com/1/92/211605391_782caa152f_b.jpg";
 
+			function changeBgImg(linkToImg) {
+				return $('body').css('background-image', 'url(' + linkToImg + ')');
+			}
+			// Set background images
 			var c = parseInt(weather.code);
 			if(c === 3200){
 				changeBgImg('http://www.imgbase.info/images/safe-wallpapers/animals/cat/37493_cat_kitten_orange_kitten.jpg');
 			}
 			switch(true) {
 				// Rainy
-				// 0 - 12, 35, 37 - 40, 45 - 47
 				case (c >= 0 && c <= 12 || c === 35 || c >= 37 && c <= 40 || c >= 45 && c <= 47):
 					changeBgImg(rainyImg);
 					break;
 				// Sunny
-				// 19, 21, 22, 32, 34, 36
 				case (c === 19 || c === 21 || c === 22 || c === 32 || c === 34 || c === 36):
 					changeBgImg(sunnyImg);
 					break;
 				// Cloudy
-				// 20, 23 - 26, 28, 30
 				case (c === 20 || c >= 23 && c <= 26 || c === 28 || c === 30):
 					changeBgImg(cloudyImg);
 					break;
 				// Snow
-				// 13 - 18, 41, 42, 46
+
 				case (c >= 13 && c <= 18 || c === 41 || c === 42 || c === 46):
 					changeBgImg(snowyImg);
 					break;
-				// 27, 29
-				// cloudy (night)
+				// Cloudy (night)
 				case (c === 27 || c === 29):
 					changeBgImg(cloudyImg_n);
 					break;
-				// 31, 33
-				// clear (night)
+				// Clear (night)
 				case (c === 31 || c === 33):
 					changeBgImg(clearImg_n);
 					break;
@@ -107,6 +142,7 @@ function loadWeather(location, woeid, unit){
 					break;
 			};
 
+			// Greying or whiting C and F
 			var activeCelsius = function(){
 				$('.temperature').html(temp);
 				$('.celsius-box').css('color', 'white');
