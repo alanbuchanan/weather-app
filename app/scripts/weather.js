@@ -14,18 +14,14 @@ $(window).on('load', function() {
 	});
 
 jQuery(document).ready(function($) {
-	// loadWeather();
-	// $(".se-pre-con").fadeOut("slow");
-	setInterval(loadWeather, 2000);
+	setTimeout(loadWeather, 2000);
+	// setInterval(loadWeather, 2000);
 });
 
 function loadWeather(location, woeid, unit){
-		// $(".se-pre-con").fadeOut("slow");
 	$.simpleWeather({
-		location: $('#cities').val(),
-		woeid: '',
-		// location: location,
-		// woeid: woeid,
+		location: location,
+		woeid: woeid,
 		unit: 'c',
 		success: function(weather){
 			console.log(weather);
@@ -59,7 +55,7 @@ function loadWeather(location, woeid, unit){
 			// Assign object vars to shortened names
 			var city = weather.city;
 			var temp = weather.temp;
-			var wcode = '<img class="weathericon" src="images/weathericons/' + weather.code + '.svg">';
+			var wcode = '<img class="weathericon" src="/images/weathericons/' + weather.code + '.svg">';
 			var wind = '<p>' + weather.wind.speed + '</p><p>' + weather.units.speed + '</p>';
 			var humidity = weather.humidity + '%';
 			var currently = weather.currently;
@@ -95,7 +91,6 @@ function loadWeather(location, woeid, unit){
 			$('.country').text(country)
 
 			// Assign background image links to variables
-			var defaultImg 	= "https://upload.wikimedia.org/wikipedia/commons/8/80/Newbury_and_surroundings.jpg";
 			var sunnyImg 	= "http://u.kanobu.ru/comments/images/92025b04-c980-46da-8859-66f64c997468.jpg";
 			var rainyImg 	= "http://webneel.com/wallpaper/sites/default/files/images/04-2013/cute-rain-in-mirror.jpg";
 			var cloudyImg 	= "http://p1.pichost.me/i/31/1542826.jpg";
@@ -108,9 +103,6 @@ function loadWeather(location, woeid, unit){
 			}
 			// Set background images
 			var c = parseInt(weather.code);
-			if(c === 3200){
-				changeBgImg('http://www.imgbase.info/images/safe-wallpapers/animals/cat/37493_cat_kitten_orange_kitten.jpg');
-			}
 			switch(true) {
 				// Rainy
 				case (c >= 0 && c <= 12 || c === 35 || c >= 37 && c <= 40 || c >= 45 && c <= 47):
