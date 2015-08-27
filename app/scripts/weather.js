@@ -8,11 +8,14 @@ if("geolocation" in navigator) {
 	loadWeather("London", "IN", "");
 }
 
+// Keep playing around with using 'f' or 'c' as unit
+
 jQuery(document).ready(function($) {
+	// loadWeather();
 	setInterval(loadWeather, 2000);
 });
 
-function loadWeather(location, woeid){
+function loadWeather(location, woeid, unit){
 	$.simpleWeather({
 		location: $('#cities').val(),
 		woeid: '',
@@ -21,22 +24,26 @@ function loadWeather(location, woeid){
 		unit: 'c',
 		success: function(weather){
 			console.log(weather);
+			console.log(weather.code);
 
-			if( this.location.length > 12 ){
+			if( this.location.length > 11 ){
 				$('.location').css('font-size', '4.5em');
 			}
 
-			if( $('#cities').val().length > 19 ){
+			if( this.location.length > 19 ){
 				$('.location').css('font-size', '3.0em');
 			}
 
 			var city = weather.city;
-			var temp = weather.temp+'&deg;';
+			var temp = weather.temp;
 			var wcode = '<img class="weathericon" src="images/weathericons/' + weather.code + '.svg">';
 			var wind = '<p>' + weather.wind.speed + '</p><p>' + weather.units.speed + '</p>';
 			var humidity = weather.humidity + '%';
 			var currently = weather.currently;
-			var text = weather.text;
+			var text = '';
+			if(currently !== weather.text){
+				text = weather.text;
+			}
 			var country = weather.country;
 
 			$('.code').text('CODE: ' + weather.code);
@@ -61,6 +68,9 @@ function loadWeather(location, woeid){
 			var cloudyImg_n = "https://c1.staticflickr.com/1/92/211605391_782caa152f_b.jpg";
 
 			var c = parseInt(weather.code);
+			if(c === 3200){
+				changeBgImg('http://www.imgbase.info/images/safe-wallpapers/animals/cat/37493_cat_kitten_orange_kitten.jpg');
+			}
 			switch(true) {
 				// Rainy
 				// 0 - 12, 35, 37 - 40, 45 - 47
@@ -96,6 +106,26 @@ function loadWeather(location, woeid){
 					changeBgImg('http://www.imgbase.info/images/safe-wallpapers/animals/cat/37493_cat_kitten_orange_kitten.jpg');
 					break;
 			};
+
+			var activeCelsius = function(){
+				$('.temperature').html(temp);
+				$('.celsius-box').css('color', 'white');
+				$('.fahrenheit-box').css('color', 'gray');
+			};
+
+			activeCelsius();
+
+			$('.celsius-box').on('click', function() {
+				activeCelsius();
+			});
+
+			var celsToFahr = Math.round(((parseInt(temp) * 9) / 5) + 32);
+
+			$('.fahrenheit-box').on('click', function() {
+				$('.temperature').html(celsToFahr);
+				$('.fahrenheit-box').css('color', 'white');
+				$('.celsius-box').css('color', 'gray')
+			});
 		},
 
 		error: function(error){
