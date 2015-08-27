@@ -48,14 +48,11 @@ function loadWeather(location, woeid, unit){
 				    $('.location').css('font-size', '1.0em');
 				}
 			}
-			// } else {
-			//     $('.location').css('font-size', '100%');
-			// }
 
 			// Assign object vars to shortened names
 			var city = weather.city;
 			var temp = weather.temp;
-			var wcode = '<img class="weathericon" src="http://alanbuchanan.github.io/weather-app/app/images/weathericons/' + weather.code + '.svg">';
+			var wcode = '<img class="weathericon" src="./images/weathericons/' + weather.code + '.svg">';
 			var wind = '<p>' + weather.wind.speed + '</p><p>' + weather.units.speed + '</p>';
 			var humidity = weather.humidity + '%';
 			var currently = weather.currently;
