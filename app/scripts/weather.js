@@ -69,10 +69,10 @@ function loadWeather(location, woeid, unit){
 			if(currently.length >= 5 && currently.length <= 9){
 				$('.currently').css('font-size', '90%');
 			}
-			if(currently.length >= 10 && currently.length <= 13){
+			if(currently.length >= 10 && currently.length <= 15){
 				$('.currently').css('font-size', '80%');
 			}
-			if(currently.length >= 13 && currently.length <= 22){
+			if(currently.length >= 15 && currently.length <= 22){
 				$('.currently').css('font-size', '70%');
 			}
 
