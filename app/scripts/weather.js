@@ -14,12 +14,16 @@ $(window).on('load', function() {
 	});
 
 jQuery(document).ready(function($) {
-	setTimeout(loadWeather, 2000);
+	// Testing: use following line---------------
 	// setInterval(loadWeather, 2000);
+	setTimeout(loadWeather, 2000);
 });
 
 function loadWeather(location, woeid, unit){
 	$.simpleWeather({
+		// Testing: use following 2 lines---------------
+		// location: $('#cities').val(),
+		// woeid: '',
 		location: location,
 		woeid: woeid,
 		unit: 'c',
@@ -28,13 +32,22 @@ function loadWeather(location, woeid, unit){
 			console.log(weather.code);
 
 			// Handle location font size
-			if( this.location.length > 11 ){
-				$('.location').css('font-size', '4.0em');
-			}
-
 			if( this.location.length > 19 ){
 				$('.location').css('font-size', '3.0em');
 			}
+
+			else if( this.location.length > 11 ){
+				$('.location').css('font-size', '3.5em');
+			}
+
+			else if( this.location.length > 9 ){
+				$('.location').css('font-size', '4.0em');
+			}
+
+			else if( this.location.length > 7 ){
+				$('.location').css('font-size', '4.5em');
+			}
+
 
 			// Handle location font size on phone screens
 			if (Modernizr.mq('(max-width: 480px)')) {
@@ -64,15 +77,15 @@ function loadWeather(location, woeid, unit){
 
 			// Handle current weather font size
 			if(currently.length >= 1 && currently.length <= 4){
-				$('.currently').css('font-size', '100%');
+				$('.currently').css('font-size', '1.6em');
 			}
-			if(currently.length >= 5 && currently.length <= 9){
+			else if(currently.length >= 5 && currently.length <= 9){
 				$('.currently').css('font-size', '90%');
 			}
-			if(currently.length >= 10 && currently.length <= 15){
+			else if(currently.length >= 10 && currently.length <= 15){
 				$('.currently').css('font-size', '80%');
 			}
-			if(currently.length >= 15 && currently.length <= 22){
+			else if(currently.length >= 15 && currently.length <= 22){
 				$('.currently').css('font-size', '70%');
 			}
 
