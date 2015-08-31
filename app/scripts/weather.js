@@ -15,7 +15,6 @@ $(window).on('load', function() {
 jQuery(document).ready(function($) {
 	// Testing: use following line---------------
 	// setInterval(loadWeather, 2000);
-	$(".se-pre-con").fadeOut("slow");
 	loadWeather();
 });
 
@@ -164,6 +163,8 @@ function loadWeather(location, woeid, unit){
 				$('.fahrenheit-box').css('color', 'white');
 				$('.celsius-box').css('color', 'gray')
 			});
+			// Once it's all loaded, fade out the loading screen
+			$(".se-pre-con").fadeOut("slow");
 		},
 
 		error: function(error){
