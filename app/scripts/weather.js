@@ -1,22 +1,10 @@
 "use strict";
 
-if("geolocation" in navigator) {
-	navigator.geolocation.getCurrentPosition(function(position){
-		loadWeather(position.coords.latitude + ',' + position.coords.longitude);
-	});
-} else {
-	loadWeather("London", "IN", "");
-}
-
-$(window).on('load', function() {
-		// Animate loader off screen
-});
-
 jQuery(document).ready(function($) {
 	// Testing: use following line---------------
 	// setInterval(loadWeather, 2000);
 	$.getJSON('http://ip-api.com/json/?callback=?').done(function(data){
-		loadWeather(data.city, '', '');
+		loadWeather(data.city + ', ' + data.country, '', '');
 	});
 });
 
@@ -26,7 +14,6 @@ function loadWeather(location, woeid, unit){
 		// location: $('#cities').val(),
 		// woeid: '',
 		location: location,
-		// location: loc,
 		woeid: woeid,
 		unit: 'c',
 		success: function(weather){
