@@ -15,7 +15,9 @@ $(window).on('load', function() {
 jQuery(document).ready(function($) {
 	// Testing: use following line---------------
 	// setInterval(loadWeather, 2000);
-	loadWeather();
+	$.getJSON('http://ip-api.com/json/?callback=?').done(function(data){
+		loadWeather(data.city, '', '');
+	});
 });
 
 function loadWeather(location, woeid, unit){
@@ -24,6 +26,7 @@ function loadWeather(location, woeid, unit){
 		// location: $('#cities').val(),
 		// woeid: '',
 		location: location,
+		// location: loc,
 		woeid: woeid,
 		unit: 'c',
 		success: function(weather){
