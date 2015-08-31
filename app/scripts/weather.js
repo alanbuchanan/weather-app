@@ -10,13 +10,13 @@ if("geolocation" in navigator) {
 
 $(window).on('load', function() {
 		// Animate loader off screen
-		$(".se-pre-con").fadeOut("slow");
-	});
+});
 
 jQuery(document).ready(function($) {
 	// Testing: use following line---------------
 	// setInterval(loadWeather, 2000);
-	setTimeout(loadWeather, 2000);
+	$(".se-pre-con").fadeOut("slow");
+	loadWeather();
 });
 
 function loadWeather(location, woeid, unit){
